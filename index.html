@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>탄소중립 도장판</title>
+<meta name="description" content="중학교 사회 환경 단원과 연결한 탄소중립 실천 활동. 하루 한 번 사진을 올리고 도장을 모아요.">
+<meta name="theme-color" content="#EDF2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1613" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: a student's stamp notebook. Today's mission sits beside a grid-ruled
+   stamp sheet; the album, textbook notes and calculator follow as plain sections. */
+:root {
+  --bg: #EDF2EE;
+  --paper: #FBFCFA;
+  --ink: #16261F;
+  --muted: #56675D;
+  --line: #CDD8D0;
+  --grid: #E2EAE4;
+  --accent: #1E6A4B;
+  --accent-fg: #FFFFFF;
+  --accent-soft: #DCEBE2;
+  --danger: #B3392A;
+  --stamp-climate: #D2452C;
+  --stamp-local: #1F7F4C;
+  --stamp-mile: #2B55A8;
+  --stamp-life: #84469A;
+  --font-display: "Do Hyeon", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --font-body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.875rem;
+  --fs-xxl: clamp(2.25rem, 6vw, 3.25rem);
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1613; --paper: #18211D; --ink: #E6EEE8; --muted: #9BABA1; --line: #2D3B34;
+    --grid: #202B26; --accent: #5CC295; --accent-fg: #0C1612; --accent-soft: #1F3329;
+    --danger: #F08571;
+    --stamp-climate: #F0735A; --stamp-local: #5FCB8E; --stamp-mile: #86A6F2; --stamp-life: #CC8FE0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1613; --paper: #18211D; --ink: #E6EEE8; --muted: #9BABA1; --line: #2D3B34;
+  --grid: #202B26; --accent: #5CC295; --accent-fg: #0C1612; --accent-soft: #1F3329;
+  --danger: #F08571;
+  --stamp-climate: #F0735A; --stamp-local: #5FCB8E; --stamp-mile: #86A6F2; --stamp-life: #CC8FE0;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--fs-md); line-height: 1.65;
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.wrap { max-width: 1080px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 28px); }
+
+/* ---------- header ---------- */
+.masthead { padding-block: 28px 20px; display: grid; gap: 10px; }
+.eyebrow { font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0.04em; }
+.masthead h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-xxl); line-height: 1.1; text-wrap: balance; }
+.masthead h1 span { color: var(--stamp-climate); }
+.lede { max-width: 38em; color: var(--muted); }
+
+.prizes { display: grid; gap: 10px; margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+.prizes-title { font-size: var(--fs-sm); color: var(--muted); }
+.prizes ol { display: flex; flex-wrap: wrap; gap: 12px 32px; }
+.prizes li { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.rank { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border: 2.5px solid currentColor; border-radius: 50%; font-family: var(--font-display); font-size: 1.125rem; transform: rotate(-7deg); }
+.prizes li:nth-child(2) .rank { transform: rotate(5deg); }
+.prize-name { font-family: var(--font-display); font-size: var(--fs-lg); line-height: 1.2; }
+
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-block: 1px solid var(--line); }
+.nav ul { display: flex; gap: 4px; overflow-x: auto; padding-block: 6px; scrollbar-width: none; }
+.nav a { display: block; white-space: nowrap; padding: 6px 12px; border-radius: 999px; color: var(--ink); text-decoration: none; font-size: var(--fs-sm); }
+.nav a:hover { background: var(--accent-soft); }
+
+main { display: grid; gap: 56px; padding-block: 28px 64px; }
+section { scroll-margin-top: 64px; }
+.sec-head { display: grid; gap: 4px; margin-bottom: 18px; }
+.sec-head h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-xl); line-height: 1.2; }
+.sec-head p { color: var(--muted); max-width: 40em; }
+
+/* ---------- today + board ---------- */
+.desk { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 880px) { .desk { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(16px, 3vw, 24px); display: grid; gap: 18px; min-width: 0; }
+.panel h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-lg); line-height: 1.2; }
+.panel-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border: 1.5px solid var(--line); border-radius: 999px; font-size: var(--fs-sm); }
+.chip span::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.chip input:checked + span { border-color: currentColor; background: var(--paper); box-shadow: inset 0 0 0 1px currentColor; }
+.chip input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ink-climate { color: var(--stamp-climate); }
+.ink-local { color: var(--stamp-local); }
+.ink-mile { color: var(--stamp-mile); }
+.ink-life { color: var(--stamp-life); }
+.chip span b { color: var(--ink); font-weight: 400; }
+
+.mission { display: grid; gap: 8px; padding-left: 14px; border-left: 3px solid currentColor; }
+.mission-text { color: var(--ink); font-size: 1.1875rem; line-height: 1.5; text-wrap: balance; }
+.mission-why { color: var(--muted); font-size: var(--fs-sm); }
+.mission-why b { color: var(--ink); font-weight: 400; }
+
+.linkbtn { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-size: var(--fs-sm); justify-self: start; }
+
+.drop { position: relative; display: grid; place-items: center; text-align: center; gap: 4px; min-height: 168px; padding: 16px; border: 2px dashed var(--line); border-radius: var(--radius); background: var(--bg); cursor: pointer; overflow: hidden; }
+.drop:hover, .drop:focus-within { border-color: var(--accent); }
+.drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.drop strong { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-lg); }
+.drop small { color: var(--muted); font-size: var(--fs-xs); }
+.drop img { display: block; max-width: 100%; max-height: 300px; border-radius: 6px; }
+.drop.has-photo { border-style: solid; padding: 8px; }
+
+.field { display: grid; gap: 6px; }
+.field > label, .field > .label { font-size: var(--fs-sm); color: var(--muted); }
+.field input[type="text"], .field input[type="number"], .field select, .field textarea {
+  width: 100%; min-width: 0; padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--paper);
+}
+.field textarea { resize: vertical; min-height: 76px; }
+.field input:read-only { background: var(--bg); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border-radius: 8px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--accent-fg); font-family: var(--font-display); font-size: 1.125rem; cursor: pointer; }
+.btn:disabled { background: var(--bg); color: var(--muted); border-color: var(--line); cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--accent); font-family: var(--font-body); font-size: var(--fs-sm); padding: 6px 12px; }
+.btn.danger { background: transparent; border-color: var(--danger); color: var(--danger); font-family: var(--font-body); font-size: var(--fs-sm); padding: 6px 12px; }
+.status { font-size: var(--fs-sm); color: var(--muted); min-height: 1.4em; }
+.status.err { color: var(--danger); }
+.notice { font-size: var(--fs-xs); color: var(--muted); }
+
+.done { display: grid; gap: 14px; justify-items: center; text-align: center; }
+.done .stamp { width: min(190px, 60%); }
+.done p { color: var(--muted); max-width: 26em; }
+.done strong { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-lg); color: var(--ink); display: block; }
+.done img.today-photo { max-height: 200px; border-radius: 8px; border: 1px solid var(--line); }
+
+/* ---------- stamp sheet ---------- */
+.sheet { background-color: var(--paper); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 22px 22px; }
+.owner { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.owner label { font-size: var(--fs-sm); color: var(--muted); }
+.owner input { flex: 1 1 160px; min-width: 0; border: 0; border-bottom: 1.5px solid var(--ink); background: transparent; padding: 4px 2px; font-family: var(--font-display); font-size: 1.125rem; border-radius: 0; }
+.tally { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: var(--fs-sm); color: var(--muted); }
+.tally b { font-family: var(--font-display); font-weight: 400; font-size: 1.375rem; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+
+.slots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(6px, 1.6vw, 12px); }
+@media (min-width: 520px) { .slots { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.slot { aspect-ratio: 1; max-width: 100%; display: grid; place-items: center; position: relative; }
+.slot.empty { border: 1.5px dashed var(--line); border-radius: 50%; color: var(--muted); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; text-align: center; line-height: 1.2; background: var(--paper); }
+.slot.empty.goal { border-color: var(--accent); color: var(--accent); }
+.slot.empty em { display: block; font-style: normal; font-family: var(--font-display); font-size: var(--fs-sm); }
+.slot button { all: unset; cursor: pointer; display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; }
+.slot button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.stamp { width: 100%; height: auto; display: block; transform: rotate(var(--rot, 0deg)); overflow: visible; }
+.stamp text { font-family: var(--font-display); }
+.stamp .st-arc { font-size: 10px; letter-spacing: 1px; }
+.stamp .st-arc-b { font-size: 9px; letter-spacing: 0.8px; }
+.stamp .st-date { font-size: 15px; font-variant-numeric: tabular-nums; }
+@keyframes thunk {
+  0% { transform: rotate(var(--rot, 0deg)) scale(1.9); opacity: 0; }
+  60% { transform: rotate(var(--rot, 0deg)) scale(0.94); opacity: 1; }
+  100% { transform: rotate(var(--rot, 0deg)) scale(1); opacity: 1; }
+}
+.stamp.is-new { animation: thunk 0.42s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .stamp.is-new { animation: none; } html { scroll-behavior: auto; } }
+
+/* ---------- album ---------- */
+.album { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.shot { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.shot .pic { all: unset; cursor: zoom-in; display: block; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); }
+.shot .pic:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.shot .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shot-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--fs-xs); }
+.shot-meta time { font-family: var(--font-display); font-size: var(--fs-md); color: var(--ink); font-variant-numeric: tabular-nums; }
+.shot-mission { font-size: var(--fs-sm); color: var(--muted); }
+.shot-memo { font-size: var(--fs-sm); white-space: pre-wrap; }
+.shot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--fs-xs); color: var(--muted); }
+.empty-note { border: 1.5px dashed var(--line); border-radius: var(--radius); padding: 28px 20px; color: var(--muted); text-align: center; }
+
+dialog { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); padding: 12px; max-width: min(92vw, 900px); }
+dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+dialog img { display: block; max-width: 100%; max-height: 76vh; margin-inline: auto; border-radius: 6px; }
+dialog form { display: flex; justify-content: flex-end; margin-top: 10px; }
+
+/* ---------- textbook notes ---------- */
+.notes { display: grid; gap: 28px 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.note { display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 3px solid currentColor; min-width: 0; }
+.note > * { color: var(--ink); }
+.note .unit { font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0.02em; }
+.note h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-lg); line-height: 1.25; }
+.note p, .note li { max-width: 34em; }
+.note ul { display: grid; gap: 4px; }
+.note li { padding-left: 14px; position: relative; font-size: var(--fs-sm); }
+.note li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 6px; height: 1.5px; background: var(--muted); }
+.formula { font-family: var(--font-display); font-size: 1.125rem; padding: 10px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; text-align: center; }
+.note .try { font-size: var(--fs-sm); color: var(--muted); }
+
+.bars { display: grid; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: 4.5em minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: var(--fs-sm); }
+.bar-track { height: 14px; background: var(--grid); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; min-width: 2px; background: var(--stamp-mile); border-radius: 3px; }
+.bar-fill.alt { background: var(--stamp-local); }
+.bar-row output, .bar-row .val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+figcaption { font-size: var(--fs-xs); color: var(--muted); margin-top: 8px; }
+
+/* ---------- calculator ---------- */
+.calc { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 760px) { .calc { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.calc-form { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.calc-form .wide { grid-column: 1 / -1; }
+.result { display: grid; gap: 14px; }
+.result .big { font-family: var(--font-display); font-size: var(--fs-xl); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.result .eq { color: var(--muted); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+
+footer { border-top: 1px solid var(--line); padding-block: 20px 32px; color: var(--muted); font-size: var(--fs-xs); }
+footer p { max-width: 60em; }
+footer p + p { margin-top: 6px; }
+
+/* ---------- join / owner (Supabase version) ---------- */
+.join-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.join-grid .wide { grid-column: 1 / -1; }
+.owner-label { font-size: var(--fs-sm); color: var(--muted); }
+.owner strong { font-family: var(--font-display); font-weight: 400; font-size: 1.125rem; border-bottom: 1.5px solid var(--ink); padding: 2px; min-width: 0; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="ink" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="rough"/>
+      <feDisplacementMap in="SourceGraphic" in2="rough" scale="1.6" result="edge"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="11" result="blot"/>
+      <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.9 1.75" result="mask"/>
+      <feComposite in="edge" in2="mask" operator="in"/>
+    </filter>
+    <path id="arcTop" d="M 21 50 A 29 29 0 0 1 79 50" fill="none"/>
+    <path id="arcBottom" d="M 11 50 A 39 39 0 0 0 89 50" fill="none"/>
+  </defs>
+</svg>
+
+<header class="wrap masthead">
+  <p class="eyebrow">중학교 사회 · 환경 문제와 지속 가능한 환경</p>
+  <h1>탄소중립 <span>도장판</span></h1>
+  <p class="lede">교과서에서 배운 기후 변화, 로컬 푸드, 푸드 마일리지를 생활에서 찾아 사진으로 남겨요. 하루에 한 번 사진을 올리면 도장이 하나씩 찍혀요.</p>
+  <div class="prizes" id="prizes">
+    <p class="prizes-title">도장을 많이 모은 친구에게 상품을 줘요</p>
+    <ol>
+      <li><span class="rank ink-climate">1등</span><span class="prize-name">스탠리 텀블러</span></li>
+      <li><span class="rank ink-mile">2등</span><span class="prize-name">친환경 소재 키링</span></li>
+    </ol>
+    <p class="notice">순위는 모은 도장 수로 정해요. 도장 수가 같을 때는 선생님이 안내한 기준을 따라요.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="바로 가기">
+  <ul class="wrap">
+    <li><a href="#today">오늘의 활동</a></li>
+    <li><a href="#board">도장판</a></li>
+    <li><a href="#album">사진첩</a></li>
+    <li><a href="#learn">교과서 연결</a></li>
+    <li><a href="#calc">푸드 마일리지 계산기</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <div class="desk">
+    <!-- ===== today ===== -->
+    <section id="today" class="panel" aria-labelledby="todayTitle">
+      <div class="panel-top">
+        <h2 id="todayTitle">오늘의 활동</h2>
+        <span class="eyebrow" id="todayDate"></span>
+      </div>
+
+      <p class="status" id="bootStatus" role="status">불러오는 중이에요.</p>
+
+      <form id="joinForm" novalidate hidden>
+        <div style="display:grid;gap:16px">
+          <p class="mission-text" id="joinTitle">처음 왔나요? 학년, 반, 번호, 이름을 알려 주세요</p>
+          <div class="join-grid">
+            <div class="field"><label for="joinGrade">학년</label><select id="joinGrade"><option value="">고르기</option><option value="1">1학년</option><option value="2">2학년</option><option value="3">3학년</option></select></div>
+            <div class="field"><label for="joinClass">반</label><input type="number" id="joinClass" min="1" max="20" inputmode="numeric" placeholder="2"></div>
+            <div class="field"><label for="joinNo">번호</label><input type="number" id="joinNo" min="1" max="50" inputmode="numeric" placeholder="15"></div>
+            <div class="field wide"><label for="joinName">이름</label><input type="text" id="joinName" maxlength="20" autocomplete="off"></div>
+          </div>
+          <p class="notice">학년, 반, 번호, 이름과 올린 사진은 선생님이 볼 수 있어요. 다음부터는 같은 기기, 같은 브라우저로 들어오면 바로 이어서 할 수 있어요.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <button type="submit" class="btn" id="joinBtn">시작하기</button>
+            <button type="button" class="btn ghost" id="joinCancel" hidden>취소</button>
+          </div>
+          <p class="status" id="joinStatus" role="status"></p>
+        </div>
+      </form>
+
+      <form id="todayForm" novalidate hidden>
+        <div style="display:grid;gap:18px">
+          <div class="field">
+            <span class="label" id="catLabel">주제 고르기</span>
+            <div class="chips" role="radiogroup" aria-labelledby="catLabel" id="catChips"></div>
+          </div>
+
+          <div class="mission" id="missionBox">
+            <p class="mission-text" id="missionText"></p>
+            <p class="mission-why" id="missionWhy"></p>
+            <button type="button" class="linkbtn" id="otherMission">다른 미션 보기</button>
+          </div>
+
+          <div>
+            <label class="drop" id="drop" for="photoInput">
+              <input type="file" id="photoInput" accept="image/*">
+              <strong id="dropTitle">사진 찍기 · 고르기</strong>
+              <small id="dropHint">직접 찍은 사진 한 장을 올려요</small>
+            </label>
+            <p class="notice" style="margin-top:6px">얼굴, 이름표, 집 주소처럼 개인 정보가 보이지 않게 찍어요.</p>
+          </div>
+
+          <div class="field">
+            <label for="memo">알게 된 점이나 느낀 점 (선택)</label>
+            <textarea id="memo" maxlength="300" placeholder="예: 급식 쌀의 원산지가 우리 도였다. 이동 거리가 짧아서 푸드 마일리지가 작다."></textarea>
+          </div>
+
+          <div style="display:grid;gap:6px;justify-items:start">
+            <button type="submit" class="btn" id="submitBtn" disabled>도장 받기</button>
+            <p class="status" id="formStatus" role="status">사진을 고르면 도장을 받을 수 있어요.</p>
+          </div>
+        </div>
+      </form>
+
+      <div class="done" id="todayDone" hidden>
+        <div id="todayStamp" style="display:contents"></div>
+        <p><strong>오늘 도장을 받았어요</strong>도장은 하루에 한 개예요. 내일 새 미션으로 다시 만나요.</p>
+        <img class="today-photo" id="todayPhoto" alt="오늘 올린 사진">
+      </div>
+    </section>
+
+    <!-- ===== board ===== -->
+    <section id="board" class="panel sheet" aria-labelledby="boardTitle">
+      <div class="panel-top">
+        <h2 id="boardTitle">도장판</h2>
+        <span class="eyebrow" id="levelText"></span>
+      </div>
+      <div class="owner">
+        <span class="owner-label">도장판 주인</span>
+        <strong id="ownerText">아직 등록 전이에요</strong>
+        <button type="button" class="linkbtn" id="editOwner" hidden>고치기</button>
+      </div>
+      <p class="tally" id="tally"></p>
+      <ol class="slots" id="slots" aria-label="모은 도장"></ol>
+      <p class="notice" id="storeNote">사진과 도장은 서버에 저장돼요. 내 도장판은 처음 등록한 기기와 브라우저에서 이어지니, 매일 같은 기기와 같은 브라우저로 들어오세요.</p>
+    </section>
+  </div>
+
+  <!-- ===== album ===== -->
+  <section id="album" aria-labelledby="albumTitle">
+    <div class="sec-head">
+      <h2 id="albumTitle">사진첩</h2>
+      <p>올린 사진이 날짜순으로 모여요. 사진을 누르면 크게 볼 수 있어요.</p>
+    </div>
+    <div id="albumList" class="album"></div>
+    <p id="albumEmpty" class="empty-note">아직 올린 사진이 없어요. 오늘의 활동에서 첫 사진을 올리면 여기에 모이고, 도장판에 첫 도장이 찍혀요.</p>
+  </section>
+
+  <!-- ===== learn ===== -->
+  <section id="learn" aria-labelledby="learnTitle">
+    <div class="sec-head">
+      <h2 id="learnTitle">교과서 연결</h2>
+      <p>사회 교과서 「환경 문제와 지속 가능한 환경」 단원의 내용이에요. 미션을 하기 전에 읽어 보세요.</p>
+    </div>
+    <div class="notes">
+      <article class="note ink-climate">
+        <p class="unit">전 지구적인 기후 변화와 해결 노력</p>
+        <h3>기후 변화</h3>
+        <p>화석 연료를 많이 쓰고 숲이 줄어들면서 대기 중 온실가스(이산화 탄소, 메테인 등)가 늘어났어요. 온실 효과가 강해져 지구의 평균 기온이 오르는 현상이 지구 온난화예요.</p>
+        <ul>
+          <li>빙하가 녹고 해수면이 높아져 해안 저지대와 섬나라가 물에 잠길 위험이 커져요.</li>
+          <li>폭염, 가뭄, 홍수, 강한 태풍 같은 기상 이변이 잦아져요.</li>
+          <li>농작물 재배 지역과 동식물이 사는 곳이 달라져요.</li>
+          <li>교토 의정서(1997)는 선진국에 감축 의무를 주었고, 파리 협정(2015)은 선진국과 개발 도상국이 모두 참여해요.</li>
+        </ul>
+      </article>
+
+      <article class="note ink-life">
+        <p class="unit">기후 변화 해결 노력의 오늘날 목표</p>
+        <h3>탄소중립</h3>
+        <p>온실가스 배출을 최대한 줄이고, 그래도 남는 양은 숲 등이 흡수하거나 기술로 없애서 실제로 늘어나는 양을 0으로 만드는 것이에요. 넷제로(Net-Zero)라고도 해요.</p>
+        <p class="formula">배출량 − 흡수·제거량 = 0</p>
+        <ul>
+          <li>파리 협정은 지구 평균 기온 상승을 산업화 이전보다 2℃보다 훨씬 낮게, 1.5℃ 이내로 막으려고 노력하자는 약속이에요.</li>
+          <li>우리나라는 2050년까지 탄소중립을 이루겠다고 선언했어요.</li>
+          <li>배출을 줄이는 미션과 흡수하는 곳을 찾는 미션이 식의 양쪽에 해당해요.</li>
+        </ul>
+      </article>
+
+      <article class="note ink-local">
+        <p class="unit">생활 속의 환경 이슈</p>
+        <h3>로컬 푸드</h3>
+        <p>멀리 옮기지 않고 그 지역에서 생산해 그 지역에서 소비하는 먹거리예요. 우리나라에서는 흔히 반경 50km 안에서 생산한 농산물을 가리켜요.</p>
+        <ul>
+          <li>이동 거리가 짧아 운송에 쓰는 연료와 온실가스 배출이 줄어요.</li>
+          <li>신선하고, 오래 보관하기 위한 처리를 덜 해도 돼요.</li>
+          <li>지역 농민의 소득이 늘어 지역 경제에 도움이 돼요.</li>
+        </ul>
+        <p class="try">찾아볼 곳: 로컬 푸드 직매장, 전통 시장, 급식 식단표의 원산지 표시</p>
+      </article>
+
+      <article class="note ink-mile">
+        <p class="unit">생활 속의 환경 이슈</p>
+        <h3>푸드 마일리지</h3>
+        <p>먹거리가 생산지에서 내 식탁에 오기까지 이동한 정도를 나타내요. 값이 클수록 운송하면서 온실가스를 많이 배출했다고 볼 수 있어요.</p>
+        <p class="formula">식품 수송량(t) × 수송 거리(km) = t·km</p>
+        <figure>
+          <div class="bars" id="countryBars" role="img" aria-label="1인당 식품 수입 푸드 마일리지 막대그래프. 한국 7,085, 일본 5,484, 영국 2,337, 프랑스 739 t·km"></div>
+          <figcaption>1인당 식품 수입 푸드 마일리지(t·km), 2010년 기준. 국립환경과학원 발표.</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== calculator ===== -->
+  <section id="calc" aria-labelledby="calcTitle">
+    <div class="sec-head">
+      <h2 id="calcTitle">푸드 마일리지 계산기</h2>
+      <p>원산지 표시를 보고 계산해 보세요. 다른 나라는 서울에서 그 나라 수도까지의 직선거리를 써요. 실제 배나 비행기가 다니는 길은 이보다 길어요.</p>
+    </div>
+    <div class="calc">
+      <form class="panel calc-form" id="calcForm" novalidate>
+        <div class="field wide">
+          <label for="foodName">식품 이름</label>
+          <input type="text" id="foodName" maxlength="20" value="바나나">
+        </div>
+        <div class="field">
+          <label for="foodWeight">무게</label>
+          <input type="number" id="foodWeight" min="0" step="any" inputmode="decimal" value="1">
+        </div>
+        <div class="field">
+          <label for="foodUnit">단위</label>
+          <select id="foodUnit"><option value="kg">kg</option><option value="g">g</option></select>
+        </div>
+        <div class="field wide">
+          <label for="origin">원산지</label>
+          <select id="origin"></select>
+        </div>
+        <div class="field wide">
+          <label for="distance" id="distanceLabel">이동 거리 (km)</label>
+          <input type="number" id="distance" min="0" step="any" inputmode="decimal">
+        </div>
+      </form>
+
+      <div class="result" aria-live="polite">
+        <p class="eyebrow">계산 결과 · 처음 값은 예시예요</p>
+        <p class="big" id="calcBig"></p>
+        <p class="eq" id="calcEq"></p>
+        <div class="bars" id="compareBars"></div>
+        <p id="calcSay"></p>
+        <button type="button" class="btn ghost" id="pasteCalc" style="justify-self:start">오늘 메모에 붙이기</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>단원 이름과 순서는 교과서 출판사에 따라 조금 다를 수 있어요.</p>
+    <p>올린 사진과 기록은 학교 활동용 서버에 저장되고, 본인과 선생님만 볼 수 있어요. 브라우저의 사이트 데이터를 지우면 내 도장판과 연결이 끊어지니 그때는 선생님께 알려 주세요.</p>
+  </div>
+</footer>
+
+<dialog id="viewer" aria-label="사진 크게 보기">
+  <img id="viewerImg" alt="">
+  <form method="dialog"><button class="btn ghost">닫기</button></form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- content ---------- */
+  var CATS = {
+    climate: { name: "기후 변화", unit: "전 지구적인 기후 변화와 해결 노력" },
+    local:   { name: "로컬 푸드", unit: "생활 속의 환경 이슈" },
+    mile:    { name: "푸드 마일리지", unit: "생활 속의 환경 이슈" },
+    life:    { name: "생활 실천", unit: "생활 속의 환경 이슈" }
+  };
+  var CAT_KEYS = ["climate", "local", "mile", "life"];
+
+  var MISSIONS = {
+    climate: [
+      { t: "걷기, 자전거, 대중교통으로 이동하는 모습을 찍어 보세요.", why: "자동차는 화석 연료를 태워 이산화 탄소를 내보내요. 이동 방법을 바꾸면 배출량이 줄어요." },
+      { t: "우리 동네에서 온실가스를 흡수하는 곳(숲, 공원, 가로수)을 찍어 보세요.", why: "탄소중립은 배출을 줄이는 것과 흡수를 늘리는 것을 함께 해야 이룰 수 있어요." },
+      { t: "쓰지 않는 전자 제품의 플러그를 뽑거나 멀티탭을 끈 모습을 찍어 보세요.", why: "전기를 만들 때도 화석 연료를 써요. 전기를 아끼면 온실가스 배출이 줄어요." },
+      { t: "우리 동네에서 온실가스가 나오는 곳을 찾아 찍어 보세요.", why: "기후 변화의 원인인 온실가스는 도로, 공장, 냉난방 기기처럼 가까운 곳에서도 나와요." },
+      { t: "교실이나 집의 냉난방 온도를 확인하고 알맞게 맞춘 모습을 찍어 보세요.", why: "냉난방은 에너지를 많이 써요. 여름 26℃ 이상, 겨울 20℃ 이하가 권장 온도예요." }
+    ],
+    local: [
+      { t: "원산지가 우리 시·도인 식재료를 찾아 원산지 표시를 찍어 보세요.", why: "가까운 곳에서 생산한 로컬 푸드는 이동 거리가 짧아 운송 중 온실가스 배출이 적어요." },
+      { t: "오늘 급식이나 식단표에서 국내산, 우리 지역 농산물을 찾아 찍어 보세요.", why: "학교 급식에 지역 농산물을 쓰는 것도 로컬 푸드 운동이에요." },
+      { t: "로컬 푸드 직매장, 전통 시장, 마트의 지역 농산물 코너를 찍어 보세요.", why: "로컬 푸드 직매장에서는 생산자의 이름과 생산지를 확인할 수 있어요." },
+      { t: "지금 제철인 과일이나 채소를 찾아 찍어 보세요.", why: "제철 농산물은 가까운 곳에서 나오는 경우가 많고, 기를 때 난방 에너지도 덜 들어요." },
+      { t: "집이나 학교 텃밭에서 기르는 채소를 찍어 보세요.", why: "직접 기른 채소는 이동 거리가 거의 0인 로컬 푸드예요." }
+    ],
+    mile: [
+      { t: "수입 식품 하나를 골라 원산지 표시를 찍고, 푸드 마일리지를 계산해 보세요.", why: "푸드 마일리지는 식품 수송량(t)에 수송 거리(km)를 곱한 값이에요." },
+      { t: "같은 종류의 식품에서 국내산과 수입산을 나란히 찍고 이동 거리를 비교해 보세요.", why: "같은 무게라도 먼 곳에서 올수록 푸드 마일리지가 커져요." },
+      { t: "오늘 먹은 간식의 원재료 원산지를 찍어 보세요. 몇 나라가 나오나요?", why: "가공식품 하나에도 여러 나라의 원료가 들어 있어 이동 거리가 길어져요." },
+      { t: "우리 집 냉장고에서 가장 먼 곳에서 온 식품을 찾아 찍어 보세요.", why: "우리나라는 식품 수입이 많아 1인당 푸드 마일리지가 큰 나라에 속해요." },
+      { t: "오늘 한 끼 식사를 찍고, 재료 가운데 가장 먼 곳에서 온 것을 적어 보세요.", why: "식탁의 푸드 마일리지를 줄이려면 가까운 곳의 먹거리를 고르면 돼요." }
+    ],
+    life: [
+      { t: "텀블러나 다회용 컵을 쓰는 모습을 찍어 보세요.", why: "일회용품은 만들 때와 버릴 때 모두 에너지를 쓰고 쓰레기 문제를 일으켜요." },
+      { t: "남김없이 비운 급식판이나 그릇을 찍어 보세요.", why: "음식물 쓰레기를 처리할 때 온실가스가 나와요. 남기지 않는 것이 가장 쉬운 실천이에요." },
+      { t: "분리배출을 바르게 한 모습을 찍어 보세요.", why: "비우고, 헹구고, 분리하고, 섞지 않으면 자원으로 다시 쓸 수 있어요." },
+      { t: "장바구니나 다회용 가방을 쓰는 모습을 찍어 보세요.", why: "비닐봉지 같은 일회용품 사용을 줄이는 것은 생활 속 환경 이슈를 해결하는 방법이에요." },
+      { t: "버려질 물건을 다시 쓰거나 고쳐 쓴 모습을 찍어 보세요.", why: "물건을 오래 쓰면 새 제품을 만들고 옮기는 데 드는 에너지를 줄일 수 있어요." }
+    ]
+  };
+
+  var GOALS = [5, 10, 20, 30];
+  var GOAL_NAMES = { 5: "새싹", 10: "묘목", 20: "나무", 30: "숲" };
+
+  /* Seoul to each capital, great-circle distance computed below */
+  var SEOUL = [37.5665, 126.9780];
+  var ORIGINS = [
+    { group: "아시아", items: [
+      ["중국", "베이징", 39.9042, 116.4074], ["일본", "도쿄", 35.6762, 139.6503], ["베트남", "하노이", 21.0278, 105.8342],
+      ["필리핀", "마닐라", 14.5995, 120.9842], ["태국", "방콕", 13.7563, 100.5018], ["말레이시아", "쿠알라룸푸르", 3.1390, 101.6869],
+      ["인도네시아", "자카르타", -6.2088, 106.8456], ["인도", "뉴델리", 28.6139, 77.2090], ["튀르키예", "앙카라", 39.9334, 32.8597]
+    ] },
+    { group: "오세아니아", items: [
+      ["오스트레일리아", "캔버라", -35.2809, 149.1300], ["뉴질랜드", "웰링턴", -41.2866, 174.7756]
+    ] },
+    { group: "아메리카", items: [
+      ["미국", "워싱턴 D.C.", 38.9072, -77.0369], ["캐나다", "오타와", 45.4215, -75.6972], ["멕시코", "멕시코시티", 19.4326, -99.1332],
+      ["콜롬비아", "보고타", 4.7110, -74.0721], ["에콰도르", "키토", -0.1807, -78.4678], ["페루", "리마", -12.0464, -77.0428],
+      ["브라질", "브라질리아", -15.7939, -47.8828], ["칠레", "산티아고", -33.4489, -70.6693]
+    ] },
+    { group: "유럽 · 아프리카", items: [
+      ["러시아", "모스크바", 55.7558, 37.6173], ["노르웨이", "오슬로", 59.9139, 10.7522], ["독일", "베를린", 52.5200, 13.4050],
+      ["프랑스", "파리", 48.8566, 2.3522], ["이탈리아", "로마", 41.9028, 12.4964], ["에스파냐", "마드리드", 40.4168, -3.7038],
+      ["에티오피아", "아디스아바바", 9.0320, 38.7469], ["남아프리카 공화국", "프리토리아", -25.7479, 28.2293]
+    ] }
+  ];
+  var LOCAL_KM = 50;
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+  function dateKey(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function dayIndex(d) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5); }
+  function hash(s) { var h = 7; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) % 9973; } return h; }
+  function num(x) { return x.toLocaleString("ko-KR"); }
+  function haversine(a, b) {
+    var R = 6371, t = function (x) { return x * Math.PI / 180; };
+    var dLat = t(b[0] - a[0]), dLon = t(b[1] - a[1]);
+    var h = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(t(a[0])) * Math.cos(t(b[0])) * Math.pow(Math.sin(dLon / 2), 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function fmtTkm(x) {
+    if (x >= 100) return num(Math.round(x));
+    if (x >= 10) return num(Math.round(x * 10) / 10);
+    if (x >= 0.01) return num(Math.round(x * 1000) / 1000);
+    return num(Math.round(x * 100000) / 100000);
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  /* ---------- Supabase ---------- */
+  var CFG = window.TANSO_CONFIG || {};
+  var configured = !!(window.supabase && CFG.url && CFG.key && CFG.url.indexOf("YOUR-PROJECT") === -1 && CFG.key.indexOf("YOUR-KEY") === -1);
+  var sb = configured ? window.supabase.createClient(CFG.url, CFG.key) : null;
+  var BUCKET = "photos";
+
+  /* Dates follow Korean time, the same clock the server uses for the one-a-day rule. */
+  function kstKey(d) {
+    var parts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(d);
+    var o = {};
+    parts.forEach(function (p) { o[p.type] = p.value; });
+    return o.year + "-" + o.month + "-" + o.day;
+  }
+  function keyIndex(key) { var p = key.split("-"); return Math.floor(Date.UTC(+p[0], +p[1] - 1, +p[2]) / 864e5); }
+  function prevKey(key) {
+    var p = key.split("-"), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] - 1));
+    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate());
+  }
+
+  /* ---------- state ---------- */
+  var uid = null;              // Supabase user id (anonymous sign-in)
+  var profile = null;          // { grade, class_no, student_no, name }
+  var entries = [];            // { id, date, cat, mission, memo, path, photo } sorted by date
+  var loading = true, bootFailed = false, editingProfile = false;
+  var todayKey = kstKey(new Date());
+  var cat = CAT_KEYS[keyIndex(todayKey) % CAT_KEYS.length];
+  var shift = 0;               // "다른 미션 보기" offset
+  var pending = null;          // { blob, preview } waiting to be stamped
+  var freshDate = null;        // entry that should animate once
+  var signedAt = 0;            // when photo links were last issued (they last one hour)
+
+  function currentMission() {
+    var list = MISSIONS[cat];
+    return list[(keyIndex(todayKey) + shift) % list.length];
+  }
+  function todayEntry() {
+    for (var i = 0; i < entries.length; i++) if (entries[i].date === todayKey) return entries[i];
+    return null;
+  }
+
+  /* ---------- server calls ---------- */
+  function signPhotos() {
+    var paths = entries.map(function (e) { return e.path; });
+    if (!paths.length) return Promise.resolve();
+    return sb.storage.from(BUCKET).createSignedUrls(paths, 3600).then(function (res) {
+      if (res.error || !res.data) return;
+      res.data.forEach(function (d, i) { if (d && d.signedUrl && entries[i] && entries[i].path === paths[i]) entries[i].photo = d.signedUrl; });
+      signedAt = Date.now();
+    });
+  }
+  function loadEntries() {
+    return sb.from("entries").select("id,day,category,mission,memo,photo_path").eq("user_id", uid).order("day", { ascending: true }).then(function (res) {
+      if (res.error) throw res.error;
+      entries = (res.data || []).map(function (r) {
+        return { id: r.id, date: r.day, cat: r.category, mission: r.mission, memo: r.memo || "", path: r.photo_path, photo: "" };
+      });
+      return signPhotos();
+    });
+  }
+  function ensureSession() {
+    if (uid) return Promise.resolve();
+    return sb.auth.signInAnonymously().then(function (res) {
+      if (res.error) throw res.error;
+      uid = res.data.user.id;
+    });
+  }
+  function boot() {
+    if (!configured) { loading = false; renderAll(); return; }
+    sb.auth.getSession().then(function (res) {
+      var session = res.data && res.data.session;
+      if (!session) return;
+      uid = session.user.id;
+      return sb.from("students").select("grade,class_no,student_no,name").eq("user_id", uid).maybeSingle().then(function (r) {
+        if (r.error) throw r.error;
+        profile = r.data || null;
+        if (profile) return loadEntries();
+      });
+    }).then(function () { loading = false; renderAll(); })
+      .catch(function () { loading = false; bootFailed = true; renderAll(); });
+  }
+
+  /* ---------- stamp ---------- */
+  function stampSVG(entry, isNew) {
+    var p = entry.date.split("-");
+    var rot = (hash(entry.date) % 21) - 10;
+    var name = CATS[entry.cat] ? CATS[entry.cat].name : "실천";
+    var label = (+p[1]) + "월 " + (+p[2]) + "일 " + name + " 도장";
+    return '<svg class="stamp ink-' + (CATS[entry.cat] ? entry.cat : "life") + (isNew ? " is-new" : "") + '" style="--rot:' + rot + 'deg" viewBox="0 0 100 100" role="img" aria-label="' + label + '">' +
+      '<g filter="url(#ink)" fill="currentColor" stroke="none">' +
+      '<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3.2"/>' +
+      '<circle cx="50" cy="50" r="21.5" fill="none" stroke="currentColor" stroke-width="1.3"/>' +
+      '<text class="st-arc"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">참 잘했어요</textPath></text>' +
+      '<text class="st-arc-b"><textPath href="#arcBottom" startOffset="50%" text-anchor="middle">' + name + '</textPath></text>' +
+      '<circle cx="14" cy="50" r="1.7"/><circle cx="86" cy="50" r="1.7"/>' +
+      '<text class="st-date" x="50" y="55.4" text-anchor="middle">' + (+p[1]) + "." + p[2] + '</text>' +
+      '</g></svg>';
+  }
+
+  /* ---------- today ---------- */
+  function renderChips() {
+    var box = $("catChips");
+    box.textContent = "";
+    CAT_KEYS.forEach(function (k) {
+      var lab = el("label", "chip ink-" + k);
+      var inp = document.createElement("input");
+      inp.type = "radio"; inp.name = "cat"; inp.value = k; inp.id = "cat-" + k; inp.checked = k === cat;
+      inp.addEventListener("change", function () { cat = k; shift = 0; renderMission(); });
+      var span = document.createElement("span");
+      span.appendChild(el("b", null, CATS[k].name));
+      lab.appendChild(inp); lab.appendChild(span);
+      box.appendChild(lab);
+    });
+  }
+  function renderMission() {
+    var m = currentMission();
+    $("missionBox").className = "mission ink-" + cat;
+    $("missionText").textContent = m.t;
+    var why = $("missionWhy");
+    why.textContent = "";
+    why.appendChild(el("b", null, "교과서 연결 · "));
+    why.appendChild(document.createTextNode(m.why));
+  }
+  function renderToday() {
+    $("todayDate").textContent = new Intl.DateTimeFormat("ko-KR", { timeZone: "Asia/Seoul", month: "long", day: "numeric", weekday: "long" }).format(new Date());
+    var boot = $("bootStatus"), join = $("joinForm"), form = $("todayForm"), doneBox = $("todayDone");
+    var done = todayEntry();
+    var view = !configured ? "setup" : loading ? "loading" : bootFailed ? "failed" : (!profile || editingProfile) ? "join" : done ? "done" : "form";
+
+    boot.hidden = !(view === "setup" || view === "loading" || view === "failed");
+    boot.className = "status" + (view === "loading" ? "" : " err");
+    boot.textContent = view === "setup" ? "아직 서버 연결 정보가 없어요. config.js 파일에 Supabase 주소와 키를 넣어 주세요."
+      : view === "failed" ? "서버에 연결하지 못했어요. 인터넷 연결을 확인하고 새로 고침해 주세요."
+      : "불러오는 중이에요.";
+    join.hidden = view !== "join";
+    form.hidden = view !== "form";
+    doneBox.hidden = view !== "done";
+    $("pasteCalc").hidden = view !== "form";
+
+    if (view === "join") {
+      $("joinTitle").textContent = profile ? "내 정보 고치기" : "처음 왔나요? 학년, 반, 번호, 이름을 알려 주세요";
+      $("joinBtn").textContent = profile ? "저장" : "시작하기";
+      $("joinCancel").hidden = !profile;
+    }
+    if (view === "done") {
+      $("todayStamp").innerHTML = stampSVG(done, freshDate === done.date);
+      var ph = $("todayPhoto");
+      ph.hidden = !done.photo;
+      if (done.photo) ph.src = done.photo;
+    }
+  }
+
+  function loadImage(url) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error("image")); };
+      img.src = url;
+    });
+  }
+  /* Resize to at most 1280px and re-encode as JPEG (well under the 2 MB bucket limit). */
+  function shrink(file) {
+    var url = URL.createObjectURL(file);
+    return loadImage(url).then(function (img) {
+      var max = 1280, w = img.naturalWidth, h = img.naturalHeight;
+      var s = Math.min(1, max / Math.max(w, h));
+      var c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      return new Promise(function (resolve, reject) {
+        c.toBlob(function (blob) {
+          if (!blob) { reject(new Error("encode")); return; }
+          resolve({ blob: blob, preview: c.toDataURL("image/jpeg", 0.82) });
+        }, "image/jpeg", 0.82);
+      });
+    }, function (e) { URL.revokeObjectURL(url); throw e; });
+  }
+  function setStatus(msg, isErr) {
+    var s = $("formStatus");
+    s.textContent = msg;
+    s.className = "status" + (isErr ? " err" : "");
+  }
+  function showPreview(dataUrl) {
+    var drop = $("drop");
+    var old = drop.querySelector("img");
+    if (old) old.remove();
+    if (dataUrl) {
+      var img = document.createElement("img");
+      img.src = dataUrl; img.alt = "고른 사진 미리 보기";
+      drop.insertBefore(img, $("dropTitle"));
+      drop.classList.add("has-photo");
+      $("dropTitle").hidden = true;
+      $("dropHint").textContent = "다른 사진으로 바꾸려면 눌러요";
+    } else {
+      drop.classList.remove("has-photo");
+      $("dropTitle").hidden = false;
+      $("dropHint").textContent = "직접 찍은 사진 한 장을 올려요";
+    }
+  }
+
+  $("photoInput").addEventListener("change", function () {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    if (file.type && file.type.indexOf("image/") !== 0) {
+      setStatus("사진 파일만 올릴 수 있어요. 사진을 다시 골라 주세요.", true);
+      return;
+    }
+    setStatus("사진을 불러오는 중이에요.");
+    shrink(file).then(function (out) {
+      pending = out;
+      showPreview(out.preview);
+      $("submitBtn").disabled = false;
+      setStatus("준비됐어요. 도장 받기를 누르세요.");
+    }).catch(function () {
+      pending = null;
+      showPreview(null);
+      $("submitBtn").disabled = true;
+      setStatus("이 사진은 열 수 없어요. JPG나 PNG 사진으로 다시 골라 주세요.", true);
+    });
+  });
+
+  $("otherMission").addEventListener("click", function () { shift += 1; renderMission(); });
+
+  $("todayForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    refreshDay();
+    if (!pending || !uid || !profile || todayEntry()) return;
+    var m = currentMission(), shot = pending;
+    var path = uid + "/" + todayKey + "-" + Math.random().toString(36).slice(2, 10) + ".jpg";
+    var row = { category: cat, mission: m.t, memo: $("memo").value.trim(), photo_path: path };
+    $("submitBtn").disabled = true;
+    setStatus("사진을 올리는 중이에요.");
+
+    sb.storage.from(BUCKET).upload(path, shot.blob, { contentType: "image/jpeg", upsert: false }).then(function (up) {
+      if (up.error) throw up.error;
+      return sb.from("entries").insert(row).select("id,day,category,mission,memo,photo_path").single().then(function (ins) {
+        if (ins.error) {
+          return sb.storage.from(BUCKET).remove([path]).then(function () { throw ins.error; }, function () { throw ins.error; });
+        }
+        return ins.data;
+      });
+    }).then(function (r) {
+      todayKey = r.day;   // the server's date is the one that counts
+      entries.push({ id: r.id, date: r.day, cat: r.category, mission: r.mission, memo: r.memo || "", path: r.photo_path, photo: shot.preview });
+      entries.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      freshDate = r.day;
+      pending = null;
+      $("memo").value = "";
+      $("photoInput").value = "";
+      showPreview(null);
+      setStatus("사진을 고르면 도장을 받을 수 있어요.");
+      renderAll();
+      freshDate = null;
+    }).catch(function (err) {
+      if (err && err.code === "23505") {
+        setStatus("오늘은 이미 도장을 받았어요. 기록을 다시 불러올게요.");
+        loadEntries().then(renderAll, renderAll);
+        return;
+      }
+      $("submitBtn").disabled = false;
+      setStatus("올리지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.", true);
+    });
+  });
+
+  /* ---------- join / edit profile ---------- */
+  function ownerLine() {
+    return profile ? profile.grade + "학년 " + profile.class_no + "반 " + profile.student_no + "번 " + profile.name : "아직 등록 전이에요";
+  }
+  $("joinForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var st = $("joinStatus");
+    var g = parseInt($("joinGrade").value, 10), c = parseInt($("joinClass").value, 10), n = parseInt($("joinNo").value, 10), name = $("joinName").value.trim();
+    st.className = "status err";
+    if (!(g >= 1 && g <= 3)) { st.textContent = "학년을 골라 주세요."; $("joinGrade").focus(); return; }
+    if (!(c >= 1 && c <= 20)) { st.textContent = "반을 1에서 20 사이 숫자로 적어 주세요."; $("joinClass").focus(); return; }
+    if (!(n >= 1 && n <= 50)) { st.textContent = "번호를 1에서 50 사이 숫자로 적어 주세요."; $("joinNo").focus(); return; }
+    if (!name || name.length > 20) { st.textContent = "이름을 20자 안으로 적어 주세요."; $("joinName").focus(); return; }
+    st.className = "status"; st.textContent = "저장하는 중이에요.";
+    $("joinBtn").disabled = true;
+    var first = !profile;
+    ensureSession().then(function () {
+      return sb.from("students").upsert({ user_id: uid, grade: g, class_no: c, student_no: n, name: name }, { onConflict: "user_id" })
+        .select("grade,class_no,student_no,name").single();
+    }).then(function (res) {
+      if (res.error) throw res.error;
+      profile = res.data;
+      editingProfile = false;
+      if (first) return loadEntries();
+    }).then(function () {
+      $("joinBtn").disabled = false;
+      st.textContent = "";
+      renderAll();
+    }).catch(function (err) {
+      $("joinBtn").disabled = false;
+      st.className = "status err";
+      var code = err && (err.code || ""), status = err && err.status;
+      st.textContent = code === "anonymous_provider_disabled" ? "아직 접속 설정이 꺼져 있어요. 선생님께 알려 주세요. (익명 로그인 사용 설정 필요)"
+        : (status === 429 || code === "over_request_rate_limit") ? "지금 접속하는 친구가 많아요. 잠시 뒤에 다시 눌러 주세요."
+        : "저장하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";
+    });
+  });
+  $("joinCancel").addEventListener("click", function () { editingProfile = false; renderAll(); });
+  $("editOwner").addEventListener("click", function () {
+    if (!profile) return;
+    editingProfile = true;
+    $("joinGrade").value = String(profile.grade); $("joinClass").value = profile.class_no; $("joinNo").value = profile.student_no; $("joinName").value = profile.name;
+    $("joinStatus").textContent = "";
+    renderAll();
+    $("today").scrollIntoView();
+    $("joinGrade").focus();
+  });
+
+  /* ---------- board ---------- */
+  function streak() {
+    var set = {};
+    entries.forEach(function (e) { set[e.date] = true; });
+    var k = todayKey;
+    if (!set[k]) k = prevKey(k);
+    var n = 0;
+    while (set[k]) { n += 1; k = prevKey(k); }
+    return n;
+  }
+  function renderBoard() {
+    var n = entries.length;
+    var total = Math.max(30, Math.ceil(n / 30) * 30);
+    var next = null;
+    for (var g = 0; g < GOALS.length; g++) if (n < GOALS[g]) { next = GOALS[g]; break; }
+    if (next === null) next = (Math.floor(n / 10) + 1) * 10;
+
+    var level = "씨앗";
+    GOALS.forEach(function (g) { if (n >= g) level = GOAL_NAMES[g]; });
+    $("levelText").textContent = "지금 단계 · " + level;
+    $("ownerText").textContent = ownerLine();
+    $("editOwner").hidden = !profile;
+
+    var tally = $("tally");
+    tally.textContent = "";
+    [["모은 도장", n, "개"], ["이어서 실천", streak(), "일"], ["다음 목표까지", next - n, "개"]].forEach(function (row) {
+      var s = el("span", null, row[0] + " ");
+      s.appendChild(el("b", null, String(row[1])));
+      s.appendChild(document.createTextNode(row[2]));
+      tally.appendChild(s);
+    });
+
+    var ol = $("slots");
+    ol.textContent = "";
+    for (var i = 0; i < total; i++) {
+      var li;
+      if (i < n) {
+        li = el("li", "slot");
+        var b = document.createElement("button");
+        b.type = "button";
+        b.innerHTML = stampSVG(entries[i], freshDate === entries[i].date);
+        b.setAttribute("aria-label", (i + 1) + "번째 도장, 사진 보기");
+        b.addEventListener("click", openViewer.bind(null, entries[i]));
+        li.appendChild(b);
+      } else {
+        var goal = GOAL_NAMES[i + 1];
+        li = el("li", "slot empty" + (goal ? " goal" : ""));
+        var inner = el("span", null, String(i + 1));
+        if (goal) inner.appendChild(el("em", null, goal));
+        li.appendChild(inner);
+      }
+      ol.appendChild(li);
+    }
+  }
+
+  /* ---------- album ---------- */
+  function openViewer(entry) {
+    if (!entry.photo) return;
+    var dlg = $("viewer");
+    $("viewerImg").src = entry.photo;
+    $("viewerImg").alt = entry.date + " " + entry.mission;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+  function renderAlbum() {
+    var list = $("albumList");
+    list.textContent = "";
+    $("albumEmpty").hidden = entries.length > 0;
+    entries.slice().reverse().forEach(function (e) {
+      var p = e.date.split("-");
+      var card = el("article", "shot");
+
+      var pic = document.createElement("button");
+      pic.type = "button"; pic.className = "pic";
+      pic.setAttribute("aria-label", (+p[1]) + "월 " + (+p[2]) + "일 사진 크게 보기");
+      if (e.photo) {
+        var img = document.createElement("img");
+        img.src = e.photo; img.alt = e.mission; img.loading = "lazy";
+        pic.appendChild(img);
+      }
+      pic.addEventListener("click", openViewer.bind(null, e));
+      card.appendChild(pic);
+
+      var meta = el("div", "shot-meta");
+      var time = el("time", null, (+p[1]) + "월 " + (+p[2]) + "일");
+      time.dateTime = e.date;
+      meta.appendChild(time);
+      meta.appendChild(el("span", "ink-" + e.cat, CATS[e.cat] ? CATS[e.cat].name : ""));
+      card.appendChild(meta);
+
+      card.appendChild(el("p", "shot-mission", e.mission));
+      if (e.memo) card.appendChild(el("p", "shot-memo", e.memo));
+
+      var actions = el("div", "shot-actions");
+      var delBtn = el("button", "linkbtn", "삭제");
+      delBtn.type = "button";
+      delBtn.addEventListener("click", function () {
+        actions.textContent = "";
+        actions.appendChild(el("span", null, "사진과 도장이 함께 지워져요."));
+        var yes = el("button", "btn danger", "지우기"); yes.type = "button";
+        var no = el("button", "btn ghost", "취소"); no.type = "button";
+        yes.addEventListener("click", function () {
+          yes.disabled = true;
+          sb.from("entries").delete().eq("id", e.id).then(function (res) {
+            if (res.error) throw res.error;
+            entries = entries.filter(function (x) { return x.id !== e.id; });
+            renderAll();
+            return sb.storage.from(BUCKET).remove([e.path]);   // the photo file goes too
+          }).catch(function () { actions.textContent = "지우지 못했어요. 다시 시도해 주세요."; });
+        });
+        no.addEventListener("click", renderAlbum);
+        actions.appendChild(yes); actions.appendChild(no);
+        yes.focus();
+      });
+      actions.appendChild(delBtn);
+      card.appendChild(actions);
+
+      list.appendChild(card);
+    });
+  }
+
+  function renderAll() { renderToday(); renderBoard(); renderAlbum(); }
+
+  /* When the tab comes back: move on to a new day, and renew photo links before they expire. */
+  function refreshDay() {
+    var k = kstKey(new Date());
+    if (k === todayKey) return;
+    todayKey = k;
+    cat = CAT_KEYS[keyIndex(todayKey) % CAT_KEYS.length]; shift = 0;
+    renderChips(); renderMission(); renderAll();
+  }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) return;
+    refreshDay();
+    if (sb && uid && entries.length && Date.now() - signedAt > 45 * 60 * 1000) signPhotos().then(renderAll, function () {});
+  });
+
+  /* ---------- textbook chart ---------- */
+  (function () {
+    var data = [["한국", 7085], ["일본", 5484], ["영국", 2337], ["프랑스", 739]];
+    var max = data[0][1], box = $("countryBars");
+    data.forEach(function (d) {
+      var row = el("div", "bar-row");
+      row.appendChild(el("span", null, d[0]));
+      var track = el("div", "bar-track"), fill = el("div", "bar-fill");
+      fill.style.width = (d[1] / max * 100) + "%";
+      track.appendChild(fill); row.appendChild(track);
+      row.appendChild(el("span", "val", num(d[1])));
+      box.appendChild(row);
+    });
+  })();
+
+  /* ---------- calculator ---------- */
+  var originSel = $("origin"), distInput = $("distance");
+  (function buildOrigins() {
+    var g0 = document.createElement("optgroup"); g0.label = "국내";
+    [["local", "우리 지역 (로컬 푸드)"], ["domestic", "국내 다른 지역"]].forEach(function (o) {
+      var op = document.createElement("option"); op.value = o[0]; op.textContent = o[1]; g0.appendChild(op);
+    });
+    originSel.appendChild(g0);
+    ORIGINS.forEach(function (grp) {
+      var og = document.createElement("optgroup"); og.label = grp.group;
+      grp.items.forEach(function (it) {
+        var op = document.createElement("option");
+        op.value = it[0]; op.textContent = it[0] + " (" + it[1] + ")";
+        op.dataset.km = String(Math.round(haversine(SEOUL, [it[2], it[3]]) / 10) * 10);
+        og.appendChild(op);
+      });
+      originSel.appendChild(og);
+    });
+    originSel.value = "필리핀";
+  })();
+
+  function syncDistance() {
+    var op = originSel.options[originSel.selectedIndex];
+    if (op.value === "local") { distInput.readOnly = false; distInput.value = "30"; $("distanceLabel").textContent = "이동 거리 (km) · 직접 고칠 수 있어요"; }
+    else if (op.value === "domestic") { distInput.readOnly = false; distInput.value = "250"; $("distanceLabel").textContent = "이동 거리 (km) · 직접 고칠 수 있어요"; }
+    else { distInput.readOnly = true; distInput.value = op.dataset.km; $("distanceLabel").textContent = "이동 거리 (km) · 서울에서 수도까지 직선거리"; }
+  }
+  var calcLine = "";
+  function renderCalc() {
+    var w = parseFloat($("foodWeight").value), km = parseFloat(distInput.value);
+    var unit = $("foodUnit").value, name = $("foodName").value.trim() || "식품";
+    var op = originSel.options[originSel.selectedIndex];
+    var place = op.value === "local" ? "우리 지역" : op.value === "domestic" ? "국내 다른 지역" : op.value;
+    var bars = $("compareBars");
+    bars.textContent = "";
+    if (!(w > 0) || !(km >= 0)) {
+      $("calcBig").textContent = "무게와 거리를 숫자로 넣어 주세요";
+      $("calcEq").textContent = ""; $("calcSay").textContent = ""; calcLine = "";
+      $("pasteCalc").disabled = true;
+      return;
+    }
+    $("pasteCalc").disabled = false;
+    var kg = unit === "g" ? w / 1000 : w, t = kg / 1000, tkm = t * km;
+    $("calcBig").textContent = fmtTkm(tkm) + " t·km";
+    $("calcEq").textContent = name + " " + num(w) + unit + " (" + num(Math.round(t * 1e6) / 1e6) + " t) × " + place + " " + num(km) + " km";
+    calcLine = "[푸드 마일리지] " + name + " " + num(w) + unit + " × " + place + " " + num(km) + "km = " + fmtTkm(tkm) + " t·km";
+
+    var max = Math.max(km, LOCAL_KM);
+    [[place, km, ""], ["로컬 푸드", LOCAL_KM, " alt"]].forEach(function (r) {
+      var row = el("div", "bar-row");
+      row.appendChild(el("span", null, r[0]));
+      var track = el("div", "bar-track"), fill = el("div", "bar-fill" + r[2]);
+      fill.style.width = (max > 0 ? r[1] / max * 100 : 0) + "%";
+      track.appendChild(fill); row.appendChild(track);
+      row.appendChild(el("span", "val", num(r[1]) + " km"));
+      bars.appendChild(row);
+    });
+    var say = $("calcSay");
+    if (km > LOCAL_KM) {
+      var times = km / LOCAL_KM;
+      say.textContent = "같은 무게를 " + LOCAL_KM + "km 안의 로컬 푸드로 바꾸면 푸드 마일리지가 약 " + num(times >= 10 ? Math.round(times) : Math.round(times * 10) / 10) + "분의 1로 줄어요.";
+    } else {
+      say.textContent = "이동 거리가 " + LOCAL_KM + "km 이내예요. 로컬 푸드라고 할 수 있어요.";
+    }
+  }
+  originSel.addEventListener("change", function () { syncDistance(); renderCalc(); });
+  ["foodName", "foodWeight", "foodUnit", "distance"].forEach(function (id) {
+    $(id).addEventListener("input", renderCalc);
+    $(id).addEventListener("change", renderCalc);
+  });
+  $("calcForm").addEventListener("submit", function (ev) { ev.preventDefault(); });
+  $("pasteCalc").addEventListener("click", function () {
+    if (!calcLine || todayEntry()) return;
+    var memo = $("memo");
+    var joined = (memo.value.trim() ? memo.value.trim() + "\n" : "") + calcLine;
+    memo.value = joined.slice(0, 300);
+    $("today").scrollIntoView();
+    memo.focus();
+  });
+
+  /* ---------- start ---------- */
+  renderChips();
+  renderMission();
+  renderAll();
+  syncDistance();
+  renderCalc();
+  boot();
+})();
+</script>
+</body>
+</html>

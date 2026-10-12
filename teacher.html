@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>탄소중립 도장판 교사용</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: a working table first (who has how many stamps), the day's photos below it. */
+:root {
+  color-scheme: light;
+  --bg: #EDF2EE; --paper: #FBFCFA; --ink: #16261F; --muted: #56675D; --line: #CDD8D0; --grid: #E2EAE4;
+  --accent: #1E6A4B; --accent-fg: #FFFFFF; --accent-soft: #DCEBE2; --danger: #B3392A; --warn: #8A5A00;
+  --stamp-climate: #D2452C; --stamp-local: #1F7F4C; --stamp-mile: #2B55A8; --stamp-life: #84469A;
+  --font-display: "Do Hyeon", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --font-body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-lg: 1.375rem; --fs-xl: 1.875rem;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0F1613; --paper: #18211D; --ink: #E6EEE8; --muted: #9BABA1; --line: #2D3B34; --grid: #202B26;
+    --accent: #5CC295; --accent-fg: #0C1612; --accent-soft: #1F3329; --danger: #F08571; --warn: #E0B25A;
+    --stamp-climate: #F0735A; --stamp-local: #5FCB8E; --stamp-mile: #86A6F2; --stamp-life: #CC8FE0;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+h1, h2, p, figure { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 28px); }
+
+.masthead { padding-block: 24px 16px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.eyebrow { font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0.04em; }
+.masthead h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.1; }
+.masthead h1 span { color: var(--stamp-climate); }
+.who { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: var(--fs-sm); color: var(--muted); }
+
+main { display: grid; gap: 40px; padding-block: 8px 64px; }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: clamp(16px, 3vw, 24px); display: grid; gap: 16px; min-width: 0; }
+.login { max-width: 420px; }
+.panel h2, .sec-head h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-lg); line-height: 1.2; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 14px; }
+.sec-head p { color: var(--muted); font-size: var(--fs-sm); }
+
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: var(--fs-sm); color: var(--muted); }
+.field input, .field select { width: 100%; min-width: 0; padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--paper); }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 18px; border-radius: 8px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--accent-fg); font-family: var(--font-display); font-size: 1.0625rem; cursor: pointer; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--accent); font-family: var(--font-body); font-size: var(--fs-sm); padding: 6px 12px; }
+.btn.danger { background: transparent; border-color: var(--danger); color: var(--danger); font-family: var(--font-body); font-size: var(--fs-sm); padding: 6px 12px; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-size: var(--fs-sm); }
+.linkbtn:disabled { color: var(--muted); text-decoration: none; cursor: default; }
+.status { font-size: var(--fs-sm); color: var(--muted); }
+.status:empty { display: none; }
+.status.err { color: var(--danger); }
+
+.toolbar { display: grid; gap: 12px 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); align-items: end; }
+.tally { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: var(--fs-sm); color: var(--muted); }
+.tally b { font-family: var(--font-display); font-weight: 400; font-size: 1.375rem; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: var(--fs-sm); }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-weight: 400; color: var(--muted); font-size: var(--fs-xs); letter-spacing: 0.03em; background: var(--bg); position: sticky; top: 0; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.stamps { font-family: var(--font-display); font-size: 1.125rem; }
+.meter { display: inline-block; vertical-align: middle; width: 72px; height: 8px; margin-left: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--accent); }
+.tag.prize { border-color: var(--stamp-climate); color: var(--stamp-climate); }
+.tag.prize.second { border-color: var(--stamp-mile); color: var(--stamp-mile); }
+.sec-head p { max-width: 44em; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--warn); border-radius: 999px; color: var(--warn); font-size: var(--fs-xs); }
+tr.is-today td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+
+.album { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.shot { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.shot .pic { all: unset; cursor: zoom-in; display: block; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); }
+.shot .pic:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.shot .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shot-who { font-family: var(--font-display); font-size: 1.0625rem; }
+.shot-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: var(--fs-xs); color: var(--muted); }
+.ink-climate { color: var(--stamp-climate); } .ink-local { color: var(--stamp-local); } .ink-mile { color: var(--stamp-mile); } .ink-life { color: var(--stamp-life); }
+.shot-mission { font-size: var(--fs-sm); color: var(--muted); }
+.shot-memo { font-size: var(--fs-sm); white-space: pre-wrap; }
+.shot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--fs-xs); color: var(--muted); }
+.empty-note { border: 1.5px dashed var(--line); border-radius: 10px; padding: 26px 20px; color: var(--muted); text-align: center; }
+
+dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); padding: 12px; max-width: min(92vw, 900px); }
+dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+dialog img { display: block; max-width: 100%; max-height: 76vh; margin-inline: auto; border-radius: 6px; }
+dialog form { display: flex; justify-content: flex-end; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<header class="wrap masthead">
+  <div>
+    <p class="eyebrow">교사용 · 학생 화면은 index.html</p>
+    <h1>탄소중립 도장판 <span>모아 보기</span></h1>
+  </div>
+  <div class="who" id="who" hidden>
+    <span id="whoEmail"></span>
+    <button type="button" class="btn ghost" id="logoutBtn">로그아웃</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="status" id="bootStatus" role="status">불러오는 중이에요.</p>
+
+  <form class="panel login" id="loginForm" novalidate hidden>
+    <h2>교사 로그인</h2>
+    <div class="field">
+      <label for="email">이메일</label>
+      <input type="email" id="email" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn" id="loginBtn">로그인</button>
+    <p class="status" id="loginStatus" role="status">Supabase에서 만든 교사 계정으로 로그인하세요.</p>
+  </form>
+
+  <div class="panel login" id="denied" hidden>
+    <h2>교사로 등록되지 않은 계정이에요</h2>
+    <p>supabase-setup.sql 맨 아래의 교사 등록 문장에 이 계정의 이메일을 넣어 실행한 뒤 다시 로그인하세요.</p>
+    <button type="button" class="btn ghost" id="deniedLogout" style="justify-self:start">다른 계정으로 로그인</button>
+  </div>
+
+  <div id="dash" hidden style="display:grid;gap:40px">
+    <section class="panel" aria-label="보기 조건">
+      <div class="toolbar">
+        <div class="field">
+          <label for="gradeSel">학년</label>
+          <select id="gradeSel"><option value="all">전체</option></select>
+        </div>
+        <div class="field">
+          <label for="classSel">반</label>
+          <select id="classSel"><option value="all">전체</option></select>
+        </div>
+        <div class="field">
+          <label for="daySel">사진 날짜</label>
+          <input type="date" id="daySel">
+        </div>
+        <div class="field">
+          <label for="sortSel">표 정렬</label>
+          <select id="sortSel"><option value="rank">도장 많은 순</option><option value="no">학년·반·번호 순</option></select>
+        </div>
+        <button type="button" class="btn ghost" id="reloadBtn">새로 고침</button>
+        <button type="button" class="btn ghost" id="csvBtn">도장 현황 CSV 내려받기</button>
+      </div>
+      <p class="tally" id="tally"></p>
+      <p class="status" id="dashStatus" role="status"></p>
+    </section>
+
+    <section aria-labelledby="tableTitle">
+      <div class="sec-head">
+        <h2 id="tableTitle">학생별 도장 현황</h2>
+        <p>순위는 지금 보이는 학생들 안에서 도장 수로 매겨요. 도장 수가 같으면 같은 순위예요. 왼쪽에 줄이 있는 학생은 고른 날짜에 사진을 올렸어요.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th class="num">순위</th><th class="num">학년</th><th class="num">반</th><th class="num">번호</th><th>이름</th><th>도장</th><th>최근 활동</th><th>사진</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="rowsEmpty" hidden style="margin-top:12px">아직 등록한 학생이 없어요. 학생들이 index.html에서 학년, 반, 번호, 이름을 넣고 시작하면 여기에 나타나요.</p>
+    </section>
+
+    <section aria-labelledby="shotsTitle">
+      <div class="sec-head">
+        <h2 id="shotsTitle">올린 사진</h2>
+        <button type="button" class="linkbtn" id="backToDay" hidden>날짜별 보기로 돌아가기</button>
+      </div>
+      <div class="album" id="shots"></div>
+      <p class="empty-note" id="shotsEmpty" hidden>이 조건에 맞는 사진이 없어요.</p>
+    </section>
+  </div>
+</main>
+
+<dialog id="viewer" aria-label="사진 크게 보기">
+  <img id="viewerImg" alt="">
+  <form method="dialog"><button class="btn ghost">닫기</button></form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+(function () {
+  "use strict";
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function kstKey(d) {
+    var parts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(d), o = {};
+    parts.forEach(function (p) { o[p.type] = p.value; });
+    return o.year + "-" + o.month + "-" + o.day;
+  }
+  function prettyDay(key) { if (!key) return "없음"; var p = key.split("-"); return (+p[1]) + "월 " + (+p[2]) + "일"; }
+
+  var CATS = { climate: "기후 변화", local: "로컬 푸드", mile: "푸드 마일리지", life: "생활 실천" };
+  var BUCKET = "photos";
+  var CFG = window.TANSO_CONFIG || {};
+  var configured = !!(window.supabase && CFG.url && CFG.key && CFG.url.indexOf("YOUR-PROJECT") === -1 && CFG.key.indexOf("YOUR-KEY") === -1);
+  var sb = configured ? window.supabase.createClient(CFG.url, CFG.key) : null;
+
+  var summary = [];                 // one row per registered student
+  var byId = {};                    // user_id -> summary row
+  var shots = [];                   // entries currently shown, with photo links
+  var gradeFilter = "all", classFilter = "all", sortBy = "rank";
+  var PRIZES = { 1: "1등 · 스탠리 텀블러", 2: "2등 · 친환경 소재 키링" };
+  var mode = { type: "day", day: kstKey(new Date()) };   // or { type: "student", id }
+  var uploadedOnDay = {};           // user_id -> true for the chosen day
+
+  function show(view) {
+    $("bootStatus").hidden = view !== "boot";
+    $("loginForm").hidden = view !== "login";
+    $("denied").hidden = view !== "denied";
+    $("dash").hidden = view !== "dash";
+    $("who").hidden = !(view === "dash" || view === "denied");
+  }
+  function setDash(msg, isErr) { var s = $("dashStatus"); s.textContent = msg || ""; s.className = "status" + (isErr ? " err" : ""); }
+
+  /* ---------- auth ---------- */
+  function enter(session) {
+    $("whoEmail").textContent = session.user.email || "학생용 익명 접속";
+    return sb.rpc("is_teacher").then(function (res) {
+      if (res.error || res.data !== true) { show("denied"); return; }
+      show("dash");
+      $("daySel").value = mode.day;
+      return reloadAll();
+    });
+  }
+  function boot() {
+    if (!configured) {
+      $("bootStatus").className = "status err";
+      $("bootStatus").textContent = "아직 서버 연결 정보가 없어요. config.js 파일에 Supabase 주소와 키를 넣어 주세요.";
+      show("boot");
+      return;
+    }
+    sb.auth.getSession().then(function (res) {
+      var session = res.data && res.data.session;
+      if (!session || session.user.is_anonymous) { show("login"); return; }
+      return enter(session);
+    }).catch(function () {
+      $("bootStatus").className = "status err";
+      $("bootStatus").textContent = "서버에 연결하지 못했어요. 인터넷 연결을 확인하고 새로 고침해 주세요.";
+      show("boot");
+    });
+  }
+  $("loginForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var st = $("loginStatus"), email = $("email").value.trim(), pw = $("password").value;
+    if (!email || !pw) { st.className = "status err"; st.textContent = "이메일과 비밀번호를 모두 넣어 주세요."; return; }
+    $("loginBtn").disabled = true; st.className = "status"; st.textContent = "로그인하는 중이에요.";
+    sb.auth.signInWithPassword({ email: email, password: pw }).then(function (res) {
+      $("loginBtn").disabled = false;
+      if (res.error || !res.data.session) { st.className = "status err"; st.textContent = "로그인하지 못했어요. 이메일과 비밀번호를 확인해 주세요."; return; }
+      $("password").value = ""; st.textContent = "";
+      return enter(res.data.session);
+    }).catch(function () { $("loginBtn").disabled = false; st.className = "status err"; st.textContent = "서버에 연결하지 못했어요. 잠시 뒤 다시 시도해 주세요."; });
+  });
+  function logout() { sb.auth.signOut().then(function () { show("login"); }, function () { show("login"); }); }
+  $("logoutBtn").addEventListener("click", logout);
+  $("deniedLogout").addEventListener("click", logout);
+
+  /* ---------- data ---------- */
+  function loadSummary() {
+    return sb.from("student_summary").select("user_id,grade,class_no,student_no,name,stamps,last_day")
+      .order("grade", { ascending: true }).order("class_no", { ascending: true }).order("student_no", { ascending: true }).then(function (res) {
+        if (res.error) throw res.error;
+        summary = res.data || [];
+        byId = {};
+        summary.forEach(function (s) { byId[s.user_id] = s; });
+      });
+  }
+  function loadShots() {
+    var q = sb.from("entries").select("id,user_id,day,category,mission,memo,photo_path");
+    q = mode.type === "day" ? q.eq("day", mode.day) : q.eq("user_id", mode.id);
+    return q.order("created_at", { ascending: false }).then(function (res) {
+      if (res.error) throw res.error;
+      shots = (res.data || []).map(function (r) { return { id: r.id, user: r.user_id, day: r.day, cat: r.category, mission: r.mission, memo: r.memo || "", path: r.photo_path, photo: "" }; });
+      if (mode.type === "day") { uploadedOnDay = {}; shots.forEach(function (s) { uploadedOnDay[s.user] = true; }); }
+      if (!shots.length) return;
+      var paths = shots.map(function (s) { return s.path; });
+      return sb.storage.from(BUCKET).createSignedUrls(paths, 3600).then(function (sig) {
+        if (sig.error || !sig.data) return;
+        sig.data.forEach(function (d, i) { if (d && d.signedUrl && shots[i]) shots[i].photo = d.signedUrl; });
+      });
+    });
+  }
+  function loadDayMarks() {
+    /* In student view the table still marks who uploaded on the chosen day. */
+    if (mode.type === "day") return Promise.resolve();
+    return sb.from("entries").select("user_id").eq("day", $("daySel").value || kstKey(new Date())).then(function (res) {
+      if (res.error) return;
+      uploadedOnDay = {};
+      (res.data || []).forEach(function (r) { uploadedOnDay[r.user_id] = true; });
+    });
+  }
+  function reloadAll() {
+    setDash("불러오는 중이에요.");
+    return loadSummary().then(loadShots).then(loadDayMarks).then(function () { setDash(""); render(); })
+      .catch(function () { setDash("불러오지 못했어요. 인터넷 연결을 확인하고 새로 고침을 눌러 주세요.", true); });
+  }
+
+  /* ---------- render ---------- */
+  function inClass(s) { return (gradeFilter === "all" || String(s.grade) === gradeFilter) && (classFilter === "all" || String(s.class_no) === classFilter); }
+  function fillSelect(sel, values, unit, current) {
+    var seen = {};
+    values.forEach(function (v) { seen[v] = true; });
+    var list = Object.keys(seen).map(Number).sort(function (a, b) { return a - b; });
+    sel.textContent = "";
+    var all = document.createElement("option"); all.value = "all"; all.textContent = "전체"; sel.appendChild(all);
+    list.forEach(function (c) { var o = document.createElement("option"); o.value = String(c); o.textContent = c + unit; sel.appendChild(o); });
+    var keep = current !== "all" && seen[current] ? current : "all";
+    sel.value = keep;
+    return keep;
+  }
+  function renderClassOptions() {
+    gradeFilter = fillSelect($("gradeSel"), summary.map(function (s) { return s.grade; }), "학년", gradeFilter);
+    var pool = summary.filter(function (s) { return gradeFilter === "all" || String(s.grade) === gradeFilter; });
+    classFilter = fillSelect($("classSel"), pool.map(function (s) { return s.class_no; }), "반", classFilter);
+  }
+  /* Rank by stamp count among the students shown; equal counts share a rank (1, 1, 3). */
+  function rankRows(rows) {
+    var sorted = rows.slice().sort(function (a, b) { return (b.stamps || 0) - (a.stamps || 0); }), rank = {};
+    sorted.forEach(function (s, i) {
+      if (!(s.stamps > 0)) { rank[s.user_id] = null; return; }
+      rank[s.user_id] = i > 0 && (sorted[i - 1].stamps || 0) === s.stamps ? rank[sorted[i - 1].user_id] : i + 1;
+    });
+    return rank;
+  }
+  function whoLine(s) { return s.grade + "학년 " + s.class_no + "반 " + s.student_no + "번 " + s.name; }
+  function render() {
+    renderClassOptions();
+    var rows = summary.filter(inClass);
+    var dayKey = $("daySel").value || kstKey(new Date());
+
+    /* tally */
+    var did = rows.filter(function (s) { return uploadedOnDay[s.user_id]; }).length;
+    var totalStamps = rows.reduce(function (a, s) { return a + (s.stamps || 0); }, 0);
+    var tally = $("tally"); tally.textContent = "";
+    [["등록한 학생", rows.length, "명"], [prettyDay(dayKey) + "에 올린 학생", did, "명"], ["모인 도장", totalStamps, "개"]].forEach(function (r) {
+      var s = el("span", null, r[0] + " "); s.appendChild(el("b", null, String(r[1]))); s.appendChild(document.createTextNode(r[2])); tally.appendChild(s);
+    });
+
+    /* table */
+    var dup = {}, rank = rankRows(rows);
+    rows.forEach(function (s) { var k = s.grade + "-" + s.class_no + "-" + s.student_no; dup[k] = (dup[k] || 0) + 1; });
+    if (sortBy === "rank") rows = rows.slice().sort(function (a, b) { return (b.stamps || 0) - (a.stamps || 0) || a.grade - b.grade || a.class_no - b.class_no || a.student_no - b.student_no; });
+    else rows = rows.slice().sort(function (a, b) { return a.grade - b.grade || a.class_no - b.class_no || a.student_no - b.student_no; });
+    var max = rows.reduce(function (a, s) { return Math.max(a, s.stamps || 0); }, 0);
+    var tb = $("rows"); tb.textContent = "";
+    $("rowsEmpty").hidden = rows.length > 0;
+    rows.forEach(function (s) {
+      var tr = el("tr", uploadedOnDay[s.user_id] ? "is-today" : null);
+      var r = rank[s.user_id];
+      tr.appendChild(el("td", "num", r ? String(r) : "–"));
+      tr.appendChild(el("td", "num", String(s.grade)));
+      tr.appendChild(el("td", "num", String(s.class_no)));
+      tr.appendChild(el("td", "num", String(s.student_no)));
+      var nameTd = el("td", null, s.name);
+      if (PRIZES[r]) nameTd.appendChild(el("span", "tag prize" + (r === 2 ? " second" : ""), PRIZES[r]));
+      if (dup[s.grade + "-" + s.class_no + "-" + s.student_no] > 1) { var t = el("span", "tag", "번호 중복"); t.title = "같은 학년·반·번호로 등록된 기록이 둘 이상이에요. 기기를 바꿔 다시 등록했을 수 있어요."; nameTd.appendChild(t); }
+      tr.appendChild(nameTd);
+      var st = el("td", "stamps", String(s.stamps || 0));
+      var meter = el("span", "meter"), fill = document.createElement("i");
+      fill.style.width = (max > 0 ? (s.stamps || 0) / max * 100 : 0) + "%";
+      meter.appendChild(fill); st.appendChild(meter);
+      tr.appendChild(st);
+      tr.appendChild(el("td", null, prettyDay(s.last_day)));
+      var act = el("td"), b = el("button", "linkbtn", "보기"); b.type = "button";
+      b.setAttribute("aria-label", s.name + " 학생 사진 보기");
+      b.disabled = !(s.stamps > 0);
+      b.addEventListener("click", function () {
+        mode = { type: "student", id: s.user_id };
+        setDash("불러오는 중이에요.");
+        loadShots().then(function () { setDash(""); render(); $("shotsTitle").scrollIntoView(); }).catch(function () { setDash("사진을 불러오지 못했어요.", true); });
+      });
+      act.appendChild(b); tr.appendChild(act);
+      tb.appendChild(tr);
+    });
+
+    /* photos */
+    var who = mode.type === "student" ? byId[mode.id] : null;
+    $("shotsTitle").textContent = mode.type === "day" ? prettyDay(mode.day) + "에 올린 사진"
+      : (who ? whoLine(who) : "학생") + "의 사진";
+    $("backToDay").hidden = mode.type === "day";
+    var visible = shots.filter(function (x) { var s = byId[x.user]; return mode.type === "student" || !s || inClass(s); });
+    var box = $("shots"); box.textContent = "";
+    $("shotsEmpty").hidden = visible.length > 0;
+    visible.forEach(function (x) {
+      var s = byId[x.user], card = el("article", "shot");
+      var pic = document.createElement("button"); pic.type = "button"; pic.className = "pic";
+      pic.setAttribute("aria-label", "사진 크게 보기");
+      if (x.photo) { var img = document.createElement("img"); img.src = x.photo; img.alt = x.mission; img.loading = "lazy"; pic.appendChild(img); }
+      pic.addEventListener("click", function () {
+        if (!x.photo) return;
+        $("viewerImg").src = x.photo; $("viewerImg").alt = x.mission;
+        var d = $("viewer"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+      });
+      card.appendChild(pic);
+      card.appendChild(el("p", "shot-who", s ? whoLine(s) : "등록 정보 없음"));
+      var meta = el("div", "shot-meta");
+      meta.appendChild(el("span", null, prettyDay(x.day)));
+      meta.appendChild(el("span", "ink-" + (CATS[x.cat] ? x.cat : "life"), CATS[x.cat] || x.cat));
+      card.appendChild(meta);
+      card.appendChild(el("p", "shot-mission", x.mission));
+      if (x.memo) card.appendChild(el("p", "shot-memo", x.memo));
+
+      var actions = el("div", "shot-actions"), del = el("button", "linkbtn", "삭제"); del.type = "button";
+      del.addEventListener("click", function () {
+        actions.textContent = "";
+        actions.appendChild(el("span", null, "이 학생의 사진과 도장이 지워져요."));
+        var yes = el("button", "btn danger", "지우기"), no = el("button", "btn ghost", "취소"); yes.type = no.type = "button";
+        yes.addEventListener("click", function () {
+          yes.disabled = true;
+          sb.from("entries").delete().eq("id", x.id).then(function (res) {
+            if (res.error) throw res.error;
+            return sb.storage.from(BUCKET).remove([x.path]);
+          }).then(reloadAll).catch(function () { actions.textContent = "지우지 못했어요. 다시 시도해 주세요."; });
+        });
+        no.addEventListener("click", render);
+        actions.appendChild(yes); actions.appendChild(no); yes.focus();
+      });
+      actions.appendChild(del); card.appendChild(actions);
+      box.appendChild(card);
+    });
+  }
+
+  /* ---------- controls ---------- */
+  $("gradeSel").addEventListener("change", function () { gradeFilter = this.value; classFilter = "all"; render(); });
+  $("classSel").addEventListener("change", function () { classFilter = this.value; render(); });
+  $("sortSel").addEventListener("change", function () { sortBy = this.value; render(); });
+  $("daySel").addEventListener("change", function () {
+    if (!this.value) return;
+    mode = { type: "day", day: this.value };
+    reloadAll();
+  });
+  $("backToDay").addEventListener("click", function () { mode = { type: "day", day: $("daySel").value || kstKey(new Date()) }; reloadAll(); });
+  $("reloadBtn").addEventListener("click", reloadAll);
+  $("csvBtn").addEventListener("click", function () {
+    var esc = function (v) { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var lines = [["순위", "학년", "반", "번호", "이름", "도장 수", "최근 활동일"].join(",")];
+    var rows = summary.filter(inClass), rank = rankRows(rows);
+    rows.sort(function (a, b) { return (b.stamps || 0) - (a.stamps || 0) || a.grade - b.grade || a.class_no - b.class_no || a.student_no - b.student_no; });
+    rows.forEach(function (s) { lines.push([rank[s.user_id] || "", s.grade, s.class_no, s.student_no, s.name, s.stamps || 0, s.last_day || ""].map(esc).join(",")); });
+    var blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "탄소중립-도장-현황-" + kstKey(new Date()) + ".csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  show("boot");
+  boot();
+})();
+</script>
+</body>
+</html>
