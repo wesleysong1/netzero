@@ -3,6 +3,6 @@
 // key 에는 Publishable key(sb_publishable_...)를 넣습니다. 예전 프로젝트라면 anon key 도 됩니다.
 // Secret key(sb_secret_...)나 service_role key 는 절대 넣지 마세요.
 window.TANSO_CONFIG = {
-  url: "https://YOUR-PROJECT.supabase.co",
-  key: "sb_publishable_YOUR-KEY"
+  url: "https://bwstitdlbpjwxyhccnkh.supabase.co/",
+  key: "sb_publishable_LHV7xpOakrNoiqz2wwB2yw_AAvSvJ6j"
 };
